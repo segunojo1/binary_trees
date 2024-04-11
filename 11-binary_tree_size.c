@@ -2,12 +2,13 @@
 /**
  * binary_tree_size - returns the size of the tree
  * @tree: the pointer to the tree
- * 
+ *
  * Return: retur the size
  */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
 	size_t height = 0;
+
 	if (!tree)
 	{
 		return (0);
