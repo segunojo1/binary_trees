@@ -55,3 +55,4 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 
 	return (btic_helper(tree, 0, size));
 }
+
