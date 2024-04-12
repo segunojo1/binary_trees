@@ -1,49 +1,50 @@
-
 #include "binary_trees.h"
 
 /**
-* bst_insert - inserts a value in a Binary Search Tree
-*
-* @tree: "bst_t **" double pointer to the root node of the BST to insert value
-* @value: "int" the value to store in the node to be inserted
-* Return: "bst *" pointer to the created node "NULL" on failure
-*/
+ * bst_insert - Inserts a value in a Binary Search Tree (BST).
+ *
+ * This function inserts a value into a Binary Search Tree (BST).
+ *
+ * @tree: Double pointer to the root node of the BST to insert value.
+ * @value: The value to store in the node to be inserted.
+ * 
+ * Return: Pointer to the created node, NULL on failure.
+ */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-	bst_t *tmp = NULL;
-	bst_t *second = NULL;
-	bst_t *new = NULL;
+    bst_t *new_node = NULL;
+    bst_t *parent = NULL;
+    bst_t *current = NULL;
 
-	if (!tree)
-		return (NULL);
-	if (*tree == NULL)
-		return (*tree = binary_tree_node(NULL, value));
+    if (!tree)
+        return NULL;
 
-	tmp = *tree;
-	while (tmp)
-	{
-		second = tmp;
-		if (value < tmp->n)
-			tmp = tmp->left;
-		else if (value > tmp->n)
-			tmp = tmp->right;
-		else if (value == tmp->n)
-			return (NULL);
-	}
+    if (*tree == NULL)
+        return (*tree = binary_tree_node(NULL, value));
 
-	new = binary_tree_node(NULL, value);
-	if (second == NULL)
-		second = new;
-	else if (value < second->n)
-	{
-		second->left = new;
-		new->parent = second;
-	}
-	else
-	{
-		second->right = new;
-		new->parent = second;
-	}
+    current = *tree;
+    while (current)
+    {
+        parent = current;
+        if (value < current->n)
+            current = current->left;
+        else if (value > current->n)
+            current = current->right;
+        else
+            return NULL;
+    }
 
-	return (new);
+    new_node = binary_tree_node(NULL, value);
+    if (value < parent->n)
+    {
+        parent->left = new_node;
+        new_node->parent = parent;
+    }
+    else
+    {
+        parent->right = new_node;
+        new_node->parent = parent;
+    }
+
+    return new_node;
 }
